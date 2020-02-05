@@ -14,12 +14,7 @@
             <a class="navbar-brand" href="{% url 'index' %}">Passagens aéreas</a>
         </nav>
 
-        <form action="{% url 'meu_nome' %}" method="post">
-            {% csrf_token %}
-            <label for="nome">Seu nome: </label>
-            <input id="nome" type="text" name="nome" value="{{ nome_usado }}">
-            <input type="submit" value="OK">
-        </form>
+        <p>Seu nome é: {{nome_usado}}</p>
 
     </div>
 </body>

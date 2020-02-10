@@ -7,8 +7,9 @@
 
     <form action="{% url 'meu_nome' %}" method="post">
         {% csrf_token %}
-        <label for="nome">Seu nome: </label>
-        <input id="nome" type="text" name="nome" value="{{ nome_usado }}">
+        <table border="1">
+            {{ form }}
+        </table>
         <input type="submit" value="OK">
     </form>
 

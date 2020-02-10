@@ -4,13 +4,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'index' %}">Passagens aéreas</a>
     </nav>
+
     <p>Sua origem é: {{ form.origem.value }}</p>
-    <p>Seu destino é: {{ form.destino }}</p>
+    <p>Seu destino é: {{ form.destino.value }}</p>
     <p>Data da ida: {{ form.data_ida.value }}</p>
     <p>Data da volta: {{ form.data_volta.value }}</p>
     <p>Pesquisa realizada: {{ form.data_pesquisa.value }}</p>
     <p>Informações extras: {{ form.informacoes.value }}</p>
     <p>Email: {{ form.email.value }}</p>
-
 
 {% endblock %}

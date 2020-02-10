@@ -6,7 +6,7 @@ def index(request):
     contexto = {'form': form}
     return render(request, 'index.html', contexto )
 
-def meu_nome(request):
+def revisao_consulta(request):
     if request.method == 'POST':
         form = PassagemForms(request.POST)
         if form.is_valid():

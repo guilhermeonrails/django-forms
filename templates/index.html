@@ -6,7 +6,7 @@
         <a class="navbar-brand" href="{% url 'index' %}">Passagens aéreas</a>
     </nav>
 
-    <form action="{% url 'meu_nome' %}" method="post">
+    <form action="{% url 'minha_consulta' %}" method="post">
         {% csrf_token %}
 
         <div class="container mt-2">

@@ -9,12 +9,17 @@
     <form action="{% url 'minha_consulta' %}" method="post">
         {% csrf_token %}
 
-        <div class="container mt-2">
+        <div class="container col-8 mt-2">
             {% for field in form.visible_fields %}
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field|add_class:'form-control' }}
+                {{ field|add_class:'form-control' }}
             </div>
+            {% for error in field.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ field.errors }}
+            </div>
+            {% endfor %}
             {% endfor %}
             <input type="submit" value="OK" class="btn btn-success">
         </div>

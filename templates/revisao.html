@@ -5,14 +5,15 @@
         <a class="navbar-brand" href="{% url 'index' %}">Passagens aéreas</a>
     </nav>
 
-    <div class="container mt-2">
+    <section class="container mt-2">
         <p>Sua origem é: {{ form.origem.value }}</p>
         <p>Seu destino é: {{ form.destino.value }}</p>
         <p>Data da ida: {{ form.data_ida.value }}</p>
         <p>Data da volta: {{ form.data_volta.value }}</p>
         <p>Pesquisa realizada: {{ form.data_pesquisa.value }}</p>
+        <p>Pesquisa realizada: {{ form.classe_viagem.value}}</p>
         <p>Informações extras: {{ form.informacoes.value }}</p>
         <p>Email: {{ form.email.value }}</p>
-    </div>
+    </section>
 
 {% endblock %}

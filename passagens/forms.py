@@ -1,11 +1,12 @@
 from django import forms
 from datetime import datetime
 from tempus_dominus.widgets import DatePicker
-from passagens.validation import origem_destino_iguais, campo_tem_algum_numero, data_ida_maior_que_data_volta, data_ida_menor_que_data_de_hoje
+from passagens.validation import *
 from passagens.classe_viagem import tipos_de_classes
 
 class PassagemForms(forms.Form):
-    origem = forms.CharField(label='Origem', max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-z-áââíõúçÁ ÉÕÚÇãàêóôüÃÀÊÓÔÜ ]+', 'title':'Não inclua números '}))
+    #4 primeiros passagem, 
+    origem = forms.CharField(label='Origem', max_length=100)
     destino = forms.CharField(label='Destino', max_length=100)
     data_ida = forms.DateField(label='Ida',widget=DatePicker())
     data_volta = forms.DateField(label='Volta',widget=DatePicker())
@@ -32,10 +33,21 @@ class PassagemForms(forms.Form):
         data_pesquisa = self.cleaned_data.get('data_pesquisa')
         data_ida = self.cleaned_data.get('data_ida')
         data_volta = self.cleaned_data.get('data_volta')
-        if origem_destino_iguais(origem, destino):
-            self.add_error('destino','O campo destino não pode ser igual ao campo origem')
-        if data_ida_menor_que_data_de_hoje(data_ida, data_pesquisa):
-            self.add_error('data_ida','Data da ida não pode ser menor que a data de hoje')
-        if data_ida_maior_que_data_volta(data_ida, data_volta):
-            self.add_error('data_volta','Data da volta não pode ser menor que data de ida')
+        lista_de_erros = {}
+        origem_destino_iguais(origem, destino, lista_de_erros)
+        data_ida_menor_que_data_de_hoje(data_ida, data_pesquisa, lista_de_erros)
+        data_ida_maior_que_data_volta(data_ida, data_volta, lista_de_erros)
+        if lista_de_erros is not None:
+            for erro in lista_de_erros:
+                mensagem_erro = lista_de_erros[erro]
+                self.add_error(erro, mensagem_erro)
         return  self.cleaned_data
+
+    # self.add_error('destino','O campo destino não pode ser igual ao campo origem')
+    # self.add_error('data_ida','Data da ida não pode ser menor que a data de hoje')
+    # self.add_error('data_volta','Data da volta não pode ser menor que data de ida')
+
+
+
+
+

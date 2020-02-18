@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
+{% load widget_tweaks %}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'index' %}">Passagens aéreas</a>
     </nav>
 
-    <form action="{% url 'meu_nome' %}" method="post">
+    <form action="{% url 'minha_consulta' %}" method="post">
         {% csrf_token %}
-        <label for="nome">Seu nome: </label>
-        <input id="nome" type="text" name="nome" value="{{ nome_usado }}">
-        <input type="submit" value="OK">
+
+        <section class="container col-8 mt-2">
+            {% for field in form.visible_fields %}
+            <section class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:'form-control' }}
+            </section>
+            {% for error in field.errors %}
+            <section class="alert alert-danger" role="alert">
+                {{ field.errors }}
+            </section>
+            {% endfor %}
+            {% endfor %}
+            <input type="submit" value="OK" class="btn btn-success">
+        </section>
     </form>
 
  {% endblock %}

@@ -1,10 +1,18 @@
 from django.shortcuts import render
+from .forms import PassagemForms
 
 def index(request):
-    return render(request, 'index.html')
+        form = PassagemForms()
+        contexto = {'form': form}
+        return render(request, 'index.html', contexto )
 
-def meu_nome(request):
+def revisao_consulta(request):
     if request.method == 'POST':
-        nome = request.POST['nome']
-        contexto = {'nome_usado' : nome}
-        return render(request, 'meu_nome.html', contexto)
+        form = PassagemForms(request.POST)
+        if form.is_valid():
+            contexto = {'form': form}
+            return render(request, 'revisao.html', contexto)
+        else:
+            print('form inválido')
+            contexto = {'form': form}
+            return render(request, 'index.html', contexto)

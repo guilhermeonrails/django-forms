@@ -8,21 +8,28 @@
 
     <form action="{% url 'minha_consulta' %}" method="post">
         {% csrf_token %}
-
-        <section class="container col-8 mt-2">
+        <section class="container col-8 mt-2 pb-2">
             {% for field in form.visible_fields %}
-            <section class="form-group">
+            <fieldset class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {{ field|add_class:'form-control' }}
-            </section>
+            </fieldset>
+
             {% for error in field.errors %}
             <section class="alert alert-danger" role="alert">
                 {{ field.errors }}
             </section>
             {% endfor %}
             {% endfor %}
+
+            
+            {% for field in pessoa_form.visible_fields %}
+            <fieldset class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:'form-control' }}
+            </fieldset>
+            {% endfor %}
             <input type="submit" value="OK" class="btn btn-success">
         </section>
     </form>
-
  {% endblock %}

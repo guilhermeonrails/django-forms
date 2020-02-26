@@ -1,5 +1,5 @@
-tipos_de_classes = [
-    ('Econômica','Econômica'),
-    ('Executiva','Executiva'),
-    ('Primeira classe','Primeira Classe'),
-]
+tipos_de_classes = {
+    (1,'Econômica'),
+    (2,'Executiva'),
+    (3,'Primeira Classe'),
+}
